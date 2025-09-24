@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './LoginPage.module.css'; // Import the CSS module
 
 export default function LoginPage() {
@@ -8,7 +9,7 @@ export default function LoginPage() {
       {/* Logo at the top left corner, links to home */}
       <div style={{ position: 'absolute', top: 32, left: 32 }}>
         <Link href="/">
-          <img src="/logo.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />Pharmac EZ
+          <Image src="/logo.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />Pharmac EZ
         </Link>
       </div>
       <form className={styles.form}>
@@ -46,7 +47,7 @@ export default function LoginPage() {
           <a href="#">Forgot Password?</a>
         </div>
         <div className={styles.extraLinks}>
-          Don't have an account? <a href="/register">Sign up! </a>
+          Don&apos;t have an account? <a href="/register">Sign up! </a>
         </div>
       </form>
     </div>

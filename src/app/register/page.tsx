@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './RegisterLogin.module.css'; // Import the CSS module
 
 export default function register() {
@@ -8,7 +9,7 @@ export default function register() {
       {/* Logo at the top left corner, links to home */}
       <div style={{ position: 'absolute', top: 32, left: 32 }}>
         <Link href="/">
-          <img src="/logo.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />Pharmac EZ
+          <Image src="/logo.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />Pharmac EZ
         </Link>
       </div>
       <div className={styles.form}>

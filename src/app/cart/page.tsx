@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 // Example cart data (replace with real data or context/store in production)
@@ -57,7 +58,7 @@ export default function CartPage() {
       {/* Logo at the top left corner, links to home */}
       <div style={{ position: 'absolute', top: 32, left: 32 }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <img src="/logo.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />
+          <Image src="/logo.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />
           <span style={{ fontWeight: 700, fontSize: 20, color: '#1a2233', marginLeft: 8 }}>Pharmac EZ</span>
         </Link>
       </div>
@@ -75,7 +76,7 @@ export default function CartPage() {
             <ul className="divide-y divide-gray-200 mb-6 sm:mb-8">
               {cart.map(item => (
                 <li key={item.id} className="flex flex-col sm:flex-row items-center py-4 sm:py-6 gap-4 sm:gap-6">
-                  <img src={item.imageUrl} alt={item.name} className="w-24 h-24 sm:w-20 sm:h-20 object-cover rounded-md border" style={{ maxWidth: '100%', height: 'auto' }} />
+                  <Image src={item.imageUrl} alt={item.name} width={96} height={96} className="w-24 h-24 sm:w-20 sm:h-20 object-cover rounded-md border" style={{ maxWidth: '100%', height: 'auto' }} />
                   <div className="flex-1 w-full">
                     <div className="font-semibold text-base sm:text-lg text-gray-800">{item.name}</div>
                     <div className="text-gray-500 text-sm">₱{item.price.toFixed(2)}</div>
