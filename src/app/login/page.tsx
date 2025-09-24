@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-2 sm:px-0">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-2 sm:px-0 max-h-800 max-w-600">
       {/* Logo at the top left corner, links to home */}
       <div className="absolute top-4 left-4 sm:top-8 sm:left-8 flex items-center gap-2">
         <Link href="/" className="flex items-center gap-2">
@@ -39,9 +39,9 @@ export default function LoginPage() {
           />
         </div>
 
-        <button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg text-base transition-colors">
+        <Link href="/"><button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg text-base transition-colors">
           Login
-        </button>
+        </button></Link>
 
         <div className="flex flex-col sm:flex-row justify-between items-center mt-2 text-sm gap-2">
           <a href="#" className="text-green-600 hover:underline">Forgot Password?</a>
