@@ -1,0 +1,92 @@
+/* Use a modern font and a subtle background for the page */
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5; /* Light gray background */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Add a shadow and more padding to the form container */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 350px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+}
+
+/* Style the title for better visual hierarchy */
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1c1c1e;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Group labels and inputs for better spacing */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-weight: 500;
+  color: #3c3c43;
+}
+
+/* Modern input field styling */
+.input {
+  padding: 12px;
+  border: 1px solid #c7c7cc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s; /* Smooth transition for focus */
+}
+
+/* Add a focus state to provide feedback to the user */
+.input:focus {
+  outline: none;
+  border-color: #007aff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}
+
+/* A more inviting and interactive button */
+.button {
+  padding: 12px;
+  border-radius: 8px;
+  background:linear-gradient(90deg, #27ae60 60%, #2ecc40 100%); /* A more vibrant blue */
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s; /* Smooth transition for hover */
+}
+
+.button:hover {
+  background-color: #005ecb; /* Darken button on hover */
+}
+
+/* Styling for extra links */
+.extraLinks {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.extraLinks a {
+  color: #007aff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.extraLinks a:hover {
+  text-decoration: underline;
+}
