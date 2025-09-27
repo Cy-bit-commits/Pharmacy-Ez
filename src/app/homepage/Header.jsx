@@ -41,7 +41,7 @@ export default function Header() {
           </Link>
           <Link href="/login" className="group flex items-center gap-1 text-gray-700 hover:text-green-700 transition-colors">
             <Heart size={24} />
-            <span className="text-sm hidden md:inline">Wishlist</span>
+            <span className="text-sm hidden md:inline"></span>
           </Link>
         </div>
       </div>

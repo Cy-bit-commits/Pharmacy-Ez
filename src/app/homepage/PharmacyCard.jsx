@@ -14,7 +14,8 @@ function PharmacyCard({ pharmacy }) {
         <h3 className="text-xl font-semibold text-gray-800 mb-2">{pharmacy.name}</h3>
         <p className="text-gray-600 text-sm">{pharmacy.address}</p>
         <div className="mt-3 flex items-center justify-between">
-          <span className="text-sm font-medium text-green-600">{pharmacy.status}</span>
+          <span className ={`font-medium ${pharmacy.status === "Open"? "text-green-300" : "text-red-500"}`}>{ pharmacy.status}</span>
+          
           <span className="text-sm text-gray-500">{pharmacy.distance}</span>
         </div>
       </div>

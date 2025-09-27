@@ -1,54 +1,66 @@
-
-
-
-
-
 import Header from './homepage/Header';
 import HeroSection from './homepage/HeroSection';
 import PharmacyCard from './homepage/PharmacyCard';
 import Footer from './homepage/Footer';
 
-// Example pharmacy data (replace with real data or fetch from API)
+// --- Data Layer ---
+// In a real application, this data would be fetched from an API.
+// The data has been standardized for consistency.
 const pharmacies = [
   {
-    id: 1,
-    name: 'Medi Tox',
-    address: 'Used to temporarily improve the appearance of moderate to severe facial wrinkles by relaxing overactive facial muscles',
-    imageUrl: '/mediTox.png',
-    status: 'Available',
-    distance: 'Medicare',
+    id: "truecare",
+    name: 'True Care Pharmacy',
+    address: 'Carmen Annex, Ozamis City',
+    imageUrl: '/pharmacies/truecare/png/trueCare.png',
+    status: 'Open',
+    distance: 2, // Distance in kilometers (number)
   },
   {
-    id: 2,
-    name: 'Medi Oil',
-    address: 'For hair health, Medi Grade olive oil ear drops to soften earwax, or various traditional liniments and massage oils for muscle pain relief',
-    imageUrl: '/mediOil.png',
-    status: 'Closed',
-    distance: 'MediCare',
+    id: "medicareplus",
+    name: 'Medi Care Plus',
+    address: 'Port Road, Ozamis City',
+    imageUrl: '/pharmacies/medicareplus/png/mediCare.png',
+    status: 'Closed', // Inconsistent key
+    distance: 5,
   },
   {
-    id: 3,
-    name: 'Medi Releif',
-    address: 'For headaches, body aches, and fever, or generic pain relievers containing ingredients like paracetamol and ibuprofen',
-    imageUrl: '/mediReleif.png',
-    status: 'Available',
-    distance: 'MediCare',
+    id: "bringtikacare",
+    name: 'BringTikaCare',
+    address: 'Rizal Avenue, Ozamis City',
+    imageUrl: '/pharmacies/bringtikacare/png/bringTCare.png',
+    status: 'Open',
+    distance: 8,
   },
 ];
 
+// --- UI Component ---
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
+      {/* Use flex-1 to ensure this section grows and pushes the footer down */}
       <main className="flex-1">
         <HeroSection />
+
         {/* Pharmacy List Section */}
-        <section className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Available Drugs</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {pharmacies.map(pharmacy => (
-              <PharmacyCard key={pharmacy.id} pharmacy={{ ...pharmacy, link: '/cart' }} />
-            ))}
+        {/* Adjusted padding for better responsiveness and added max-width */}
+        <section className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+          <h2 className="text-3xl font-bold text-gray-800 mb-12 text-center">
+           Local Pharmacies
+          </h2>
+          {/* Fixed responsive grid: 1 col on mobile, 2 on tablet, 3 on desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 md:gap-24">
+            {pharmacies.map(pharmacy => {
+              // Prepare props to handle data inconsistencies and formatting
+              const pharmacyProps = {
+                ...pharmacy,
+                status: pharmacy.status || pharmacy.status || 'N/A', // Handles inconsistent 'status' key
+                distance: `${pharmacy.distance}km away`,
+                link: `/pharmacies/${pharmacy.id}`,
+              };
+
+              return <PharmacyCard key={pharmacy.id} pharmacy={pharmacyProps} />;
+            })}
           </div>
         </section>
       </main>

@@ -11,14 +11,14 @@ const initialCart = [
     name: 'MediTox 500mg',
     price: 25.0,
     quantity: 2,
-    imageUrl: '/mediTox.png',
+    imageUrl: 'pharmacies/medicareplus/png/mediTox.png',
   },
   {
     id: 2,
     name: 'Calm flex ',
     price: 8.00,
     quantity: 1,
-    imageUrl: '/calmFlex.png',
+    imageUrl: 'pharmacies/bringtikacare/png/calmFlex.png',
   },
   {
     id: 3,
@@ -48,17 +48,17 @@ export default function CartPage() {
   };
 
   const handleRemove = (id: number) => {
-    setCart(cart => cart.filter(item => item.id !== id));
+    setCart(cart => cart.filter(item => item.id !== id)); //removes item from the cart
   };
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0); // calculates the totalprices
 
   return (
     <div>
       {/* Logo at the top left corner, links to home */}
       <div style={{ position: 'absolute', top: 32, left: 32 }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Image src="/logo.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />
+          <Image src="/logo.png" alt="Logo" width={48} height={48} style={{ borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />
           <span style={{ fontWeight: 700, fontSize: 20, color: '#1a2233', marginLeft: 8 }}>Pharmac EZ</span>
         </Link>
       </div>
