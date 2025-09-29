@@ -125,7 +125,7 @@ export default function ShopPage() {
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between z-10 relative">
                 <div className="max-w-xl text-center md:text-left mb-10 md:mb-0">
                     <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-4">Your Health, <br /> Delivered Fast.</h1>
-                    <p className="text-xl opacity-90 mb-8">Get items from Ozamis City's trusted pharmacies, delivered to your doorstep.</p>
+                    <p className="text-xl opacity-90 mb-8">Get items from Ozamis City&apos;s trusted pharmacies, delivered to your doorstep.</p>
                     <Link href="#shop" className="bg-white text-green-700 hover:bg-gray-100 font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">Start Shopping</Link>
                 </div>
                 <div className="relative flex-shrink-0 w-full max-w-lg h-64 md:h-80">
