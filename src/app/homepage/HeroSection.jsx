@@ -12,7 +12,7 @@ export default function HeroSection() {
           <p className="text-xl opacity-90 mb-6">
             Everything is made easy with PharmEZ. Get your medications and wellness products quickly.
           </p>
-          <Link href="/products" className="bg-white text-green-700 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300">
+          <Link href="/cart" className="bg-white text-green-700 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300">
             Shop Now
           </Link>
         </div>

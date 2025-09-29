@@ -9,7 +9,7 @@ import Footer from './homepage/Footer';
 const pharmacies = [
   {
     id: "truecare",
-    name: 'True Care Pharmacy',
+    name: 'True Care ',
     address: 'Carmen Annex, Ozamis City',
     imageUrl: '/pharmacies/truecare/png/trueCare.png',
     status: 'Open',
@@ -24,13 +24,14 @@ const pharmacies = [
     distance: 5,
   },
   {
-    id: "bringtikacare",
-    name: 'BringTikaCare',
+    id: "zion",
+    name: 'Zion Pharmacy',
     address: 'Rizal Avenue, Ozamis City',
-    imageUrl: '/pharmacies/bringtikacare/png/bringTCare.png',
+    imageUrl: '/pharmacies/zion/png/ZionLogo.png',
     status: 'Open',
     distance: 8,
   },
+   
 ];
 
 // --- UI Component ---
@@ -56,7 +57,7 @@ export default function HomePage() {
                 ...pharmacy,
                 status: pharmacy.status || pharmacy.status || 'N/A', // Handles inconsistent 'status' key
                 distance: `${pharmacy.distance}km away`,
-                link: `/pharmacies/${pharmacy.id}`,
+                link: `/cart`,
               };
 
               return <PharmacyCard key={pharmacy.id} pharmacy={pharmacyProps} />;
