@@ -242,7 +242,7 @@ export default function ShopPage() {
                     {cart.map(item => (
                       <li key={item.id} className="flex items-center gap-4">
                         <div className="w-12 h-12 relative flex-shrink-0">
-                          <Image src={item.imageUrl || '/placeholder.png'} layout="fill" objectFit="contain" className="rounded-md border"/>
+                          <Image src={item.imageUrl || '/placeholder.png'} alt={item.name} layout="fill" objectFit="contain" className="rounded-md border"/>
                         </div>
                         <div className="flex-grow">
                           <p className="font-semibold">{item.name}</p>
