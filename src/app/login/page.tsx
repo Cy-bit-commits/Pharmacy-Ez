@@ -13,7 +13,7 @@ export default function LoginPage() {
         </Link>
       </div>
       <form className="w-full max-w-sm bg-white rounded-lg shadow-lg p-6 sm:p-8 flex flex-col gap-4 mt-20">
-        <h2 className="text-2xl font-bold text-center text-green-700 mb-2">Login</h2>
+        <h2 className="text-2xl font-bold text-center text-black-700 mb-2">Login</h2>
 
         <div className="flex flex-col gap-1">
           <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>

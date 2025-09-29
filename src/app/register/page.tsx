@@ -7,9 +7,12 @@ export default function register() {
   return (
     <div className={styles.loginPage}>
       {/* Logo at the top left corner, links to home */}
-      <div style={{ position: 'absolute', top: 32, left: 32 }}>
-        <Link href="/">
-          <Image src="/logo.png" alt="Logo" width={48} height={48} style={{ borderRadius: 10, objectFit: 'cover', boxShadow: '0 2px 8px #e3e8ee', cursor: 'pointer' }} />Pharmac EZ
+      <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-2 sm:px-0 max-h-800 max-w-600">
+      {/* Logo at the top left corner, links to home */}
+      <div className="absolute top-4 left-4 sm:top-8 sm:left-8 flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.png" alt="Logo" width={40} height={40} className="rounded-lg shadow-md" />
+          <span className="font-bold text-lg text-green-700 hidden sm:inline">Pharmac EZ</span>
         </Link>
       </div>
       <div className={styles.form}>
@@ -37,6 +40,7 @@ export default function register() {
            <Link href="/login">Already have an account?</Link>
         </div>
       </div>
+    </div>
     </div>
   );
 }

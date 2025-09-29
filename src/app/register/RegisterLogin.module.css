@@ -54,7 +54,7 @@
 /* Add a focus state to provide feedback to the user */
 .input:focus {
   outline: none;
-  border-color: #007aff;
+  border-color: green;
   box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
 }
 
@@ -82,7 +82,7 @@
 }
 
 .extraLinks a {
-  color: #007aff;
+  color: green;
   text-decoration: none;
   font-size: 14px;
 }

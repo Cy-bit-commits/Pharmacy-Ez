@@ -34,7 +34,7 @@ export default function Footer() {
         <div>
           <h4 className="text-lg font-semibold text-white mb-4">Contact Us</h4>
           <p className="text-sm">La Salle University, Ozamis, State, 7200</p>
-          <p className="text-sm">Phone: (+63) 456-7890</p>
+          <p id="contact" className="text-sm">Phone: (+63) 456-7890</p>
           <p className="text-sm">Email: PharmacEZ@PharmacEz.com</p>
         </div>
         </div>
