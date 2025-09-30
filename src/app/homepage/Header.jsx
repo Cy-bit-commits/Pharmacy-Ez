@@ -9,9 +9,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHowToOrderOpen, setIsHowToOrderOpen] = useState(false);
-  const [isFaqOpen, setIsFaqOpen] = useState(false); // State for the FAQ modal
+  const [isFaqOpen, setIsFaqOpen] = useState(false);
 
-  // Effect to lock body scroll when any modal is open
   useEffect(() => {
     if (isMenuOpen || isHowToOrderOpen || isFaqOpen) {
       document.body.style.overflow = 'hidden';
@@ -76,7 +75,6 @@ export default function Header() {
       </header>
 
       {/* --- Mobile Menu Panel --- */}
-      {/* (Mobile menu code remains the same as before) */}
       <AnimatePresence>
         {isMenuOpen && (
              <motion.div
@@ -89,7 +87,32 @@ export default function Header() {
         )}
       </AnimatePresence>
       <div className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        {/* Mobile menu content */}
+        <div className="flex items-center justify-between p-4 border-b">
+            <h2 className="font-bold text-lg text-green-700">Menu</h2>
+            <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu">
+                <X size={28} className="text-gray-700" />
+            </button>
+        </div>
+        {/* --- FIXED MENU CONTENT --- */}
+        <nav className="flex flex-col p-4 space-y-4">
+            <div className="relative">
+                <input 
+                    type="text" 
+                    placeholder="Search..." 
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            </div>
+            <Link href="/cart" className="flex items-center gap-4 text-lg text-gray-800 p-3 rounded-md hover:bg-gray-100">
+                <ShoppingCart size={24} />
+                <span>Cart</span>
+                <span className="ml-auto bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">3</span>
+            </Link>
+            <Link href="/login" className="flex items-center gap-4 text-lg text-gray-800 p-3 rounded-md hover:bg-gray-100">
+                <User size={24} />
+                <span>Account</span>
+            </Link>
+        </nav>
       </div>
 
       {/* --- How to Order Modal --- */}
@@ -97,7 +120,7 @@ export default function Header() {
         {isHowToOrderOpen && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
             onClick={() => setIsHowToOrderOpen(false)}
           >
             <motion.div
@@ -126,7 +149,7 @@ export default function Header() {
         {isFaqOpen && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
             onClick={() => setIsFaqOpen(false)}
           >
             <motion.div
