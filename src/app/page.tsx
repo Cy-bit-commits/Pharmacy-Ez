@@ -12,7 +12,7 @@ const pharmacies = [
     name: 'True Care ',
     address: 'Carmen Annex, Ozamis City',
     imageUrl: '/pharmacies/truecare/png/trueCare.png',
-    status: 'Open',
+    status: 'Closed',
     distance: 2, // Distance in kilometers (number)
   },
   {
@@ -26,7 +26,7 @@ const pharmacies = [
   {
     id: "zion",
     name: 'Zion Pharmacy',
-    address: 'Rizal Avenue, Ozamis City',
+    address: ' Feliciano St., Aguada',
     imageUrl: '/pharmacies/zion/png/ZionLogo.png',
     status: 'Open',
     distance: 8,

@@ -18,9 +18,49 @@ const initialPharmacies = [
     { name: "Zion Pharmacy", id: "zion", logoUrl: "/pharmacies/zion/png/ZionLogo.png" },
 ];
 const pharmacyImageFiles: { [key: string]: string[] } = {
-  bringtikacare: ["calmFlex.png", "AllerCare.png", "GastroGuard.png", "RespiraTab.png", "wellness/ComfortNap.png", "wellness/DermaGlow.png", "wellness/Immunicare.png"],
+  bringtikacare: ["calmFlex.png",
+     "AllerCare.png",
+      "GastroGuard.png",
+       "RespiraTab.png",
+       "CalmFlex.png",
+      "wellness/ComfortNap.png", 
+      "wellness/DermaGlow.png", 
+      "wellness/Immunicare.png",
+      
+    ],
   medicareplus: ["Medicilin.png", "mediReleif.png", "MediGel.png", "wellness/MediOil.png", "wellness/MediTox.png", "wellness/MediTherapy.png"],
-  zion: ["Zion AnalgesicAntipyretic (Generic).png", "Zion Antacid (Generic).png", "Zion AntiAshtma (Generic).png", "Zion Antidiarrheal (Generic).png", "Zion Antihistamine (Generic).png", "Zion MefenamicAcid (Generic).png", "Zion Mucolytic (Generic).png"],
+  zion: [
+    "Zion AnalgesicAntipyretic (Generic).png",
+    "Zion AnalgesicAntipyreticDecongestantAntihistamine Syrup (Generic).png",
+    "Zion Antacid (Generic).png",
+    "Zion AntiAshtma (Generic).png",
+    "Zion Antidiarrheal (Generic).png",
+    "Zion Antihistamine (Generic).png",
+    "Zion DecongestantAntihistamineAnalgesicAntipyretic 325mg(Generic) .png",
+    "Zion DecongestantAntihistamineAnalgesicAntipyretic 500mg(Generic) .png",
+    "Zion Laxative (Generic).png",
+    "Zion MefenamicAcid (Generic).png",
+    "Zion Mucolytic (Generic).png",
+    "Zion Mucolytic 15mg (Generic).png",
+    "Zion Mucolytic Syrup 250mg (Generic).png",
+    "Zion Paracetamol Syrup 125mg (Generic).png",
+    "Zion Paracetamol Syrup 250mg(Generic).png",
+    // Wellness products (in wellness/ subfolder)
+    "wellness/Zion Ascorbic Acid Gummies (Wellness).png",
+    "wellness/Zion Ascorbic Acid+Zinc.png",
+    "wellness/Zion AscorbicAcid Kid (Wellness).png",
+    "wellness/Zion AscorbicAcidZinc (Wellness).png",
+    "wellness/Zion Iron-AntiAnemic(Wellness).png",
+    "wellness/Zion Kids Vit+Zinc Gummies (Wellness).png",
+    "wellness/Zion Kids Vitamins+Zinc Gummies (Wellness).png",
+    "wellness/Zion Memo Gold (Wellness).png",
+    "wellness/Zion Multivitamins + Zinc (Wellness).png",
+    "wellness/Zion Multivitamins Kids Syrup.png",
+    "wellness/Zion Multivitamins+Zinc+Copper (Wellness).png",
+    "wellness/Zion Multivitamis (Wellness).png",
+    "wellness/Zion Neurotonic (Wellness).png",
+    "wellness/Zion VitaminE+Lecithin (Wellness) .png",
+  ],
 };
 const formatProductName = (filename: string): string => filename.split('/').pop()?.replace('.png', '').replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase()).trim();
 const adImages = ['/ads/Ad1.png', '/ads/Ad2.png', '/ads/PharmacEZAd1.png', '/ads/PharmacEZ Ad2.png', '/ads/PharmacEZAdvertisement.png', '/ads/Zion Advertisement.png'];
@@ -29,18 +69,39 @@ const adImages = ['/ads/Ad1.png', '/ads/Ad2.png', '/ads/PharmacEZAd1.png', '/ads
 // --- SUB-COMPONENTS for a cleaner structure ---
 const Header = ({ cartItemCount }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    useEffect(() => { document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto'; return () => { document.body.style.overflow = 'auto'; }; }, [isMenuOpen]);
+    useEffect(() => { 
+      document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto'; 
+      return () => 
+        { document.body.style.overflow = 'auto';
+
+         }; 
+        }, 
+        [isMenuOpen]);
     const handleLogout = () => { setIsMenuOpen(false); alert("You have been logged out."); };
     
     return (
         <>
             <header className="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
                 <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-                    <Link href="/" className="flex items-center space-x-2"><Image src="/logo.png" alt="PharmEZ Logo" width={40} height={40} className="rounded-full" /><span className="text-2xl font-bold text-green-700">PharmacEZ</span></Link>
-                    <div className="hidden lg:flex flex-grow max-w-xl mx-8 relative"><input type="text" placeholder="Search products..." className="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500" /><Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} /></div>
+                    <Link href="/" className="flex items-center space-x-2">
+                    <Image src="/logo.png" alt="PharmEZ Logo" width={40} height={40} className="rounded-full" />
+                    <span className="text-2xl font-bold text-green-700">PharmacEZ</span>
+                    </Link>
+                    <div className="hidden lg:flex flex-grow max-w-xl mx-8 relative">
+                      <input type="text" placeholder="Search products..." className="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500" />
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                      </div>
                     <div className="hidden lg:flex items-center space-x-6">
-                        <Link href="/cart" className="relative flex items-center gap-1 text-gray-700 hover:text-green-700"><ShoppingCart size={24} /><span>Cart</span>{cartItemCount > 0 && <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{cartItemCount}</span>}</Link>
-                        <Link href="/account" className="flex items-center gap-1 text-gray-700 hover:text-green-700"><User size={24} /><span>Account</span></Link>
+                        <Link href="/cart" className="relative flex items-center gap-1 text-gray-700 hover:text-green-700"><ShoppingCart size={24} />
+                        <span>
+                          Cart</span>
+                          {cartItemCount > 0 && <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                            {cartItemCount}</span>}
+                            </Link>
+                        <Link href="/account" className="flex items-center gap-1 text-gray-700 hover:text-green-700">
+                        <User size={24} />
+                        <span>
+                          Account</span></Link>
                         <button onClick={handleLogout} className="flex items-center gap-1 text-gray-700 hover:text-red-600"><LogOut size={24} /><span>Exit</span></button>
                     </div>
                     <div className="lg:hidden"><button onClick={() => setIsMenuOpen(true)} aria-label="Open menu"><Menu size={28} /></button></div>
@@ -67,8 +128,32 @@ const HeroSection = () => {
     return (
         <section className="relative bg-gradient-to-r from-green-600 to-emerald-500 text-white py-20 px-4 overflow-hidden">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between z-10 relative">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-xl text-center md:text-left mb-10 md:mb-0"><h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-4">Your Health, <br /> Delivered Fast.</h1><p className="text-xl opacity-90 mb-8">Get essentials from Ozamis City's trusted pharmacies, delivered right to your doorstep.</p><Link href="#shop" className="bg-white text-green-700 hover:bg-gray-100 font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">Start Shopping</Link></motion.div>
-                <div className="relative flex-shrink-0 w-full max-w-lg h-64 md:h-80"><AnimatePresence>{adImages.map((src, index) => (index === currentAdIndex && <motion.div key={src} initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.8 }} className="absolute inset-0"><Image src={src} alt="Ad" layout="fill" objectFit="cover" priority={index === 0} className="rounded-2xl shadow-2xl" /></motion.div>))}</AnimatePresence></div>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-xl text-center md:text-left mb-10 md:mb-0"><h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-4">Your Health, <br /> Delivered Fast.</h1><p className="text-xl opacity-90 mb-8">
+                  Get essentials from Ozamis City&apos;s trusted pharmacies, delivered right to your doorstep.</p>
+                  <Link href="#shop" className="bg-white text-green-700 hover:bg-gray-100 font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+                  Start Shopping</Link>
+                  </motion.div>
+                <div className="relative flex-shrink-0 w-full max-w-lg h-64 md:h-80">
+                  <AnimatePresence>
+                    {adImages.map((src, index) => 
+                      (index === currentAdIndex && 
+                      <motion.div key={src} 
+                      initial={{ opacity: 0, scale: 1.05 }} 
+                      animate={{ opacity: 1, scale: 1 }} 
+                      exit={{ opacity: 0, scale: 0.95 }} 
+                      transition={{ duration: 0.8 }} 
+                      className="absolute inset-0"
+                      >
+                        <Image src={src} alt="Ad" layout="fill" objectFit="cover" 
+                        priority={index === 0} 
+                        className="rounded-2xl shadow-2xl" 
+                        />
+                        </motion.div>
+                      )
+                      )
+                      }
+                      </AnimatePresence>
+                      </div>
             </div>
         </section>
     );
@@ -79,11 +164,46 @@ const CartContent = ({ cart, cartTotal, handleUpdateQuantity, onCheckout }) => (
         <div className="p-6 max-h-[calc(100vh-160px)] overflow-y-auto">
             {cart.length === 0 ? (<p className="text-gray-500 text-center py-8">Your cart is empty.</p>) : (
                 <ul className="space-y-4">{cart.map(item => (
-                    <li key={item.id} className="flex items-center gap-4"><div className="w-16 h-16 relative flex-shrink-0"><Image src={item.imageUrl || '/placeholder.png'} alt={item.name} layout="fill" objectFit="contain" className="rounded-md border bg-white p-1"/></div><div className="flex-grow"><p className="font-semibold">{item.name}</p><p className="text-sm text-gray-500">{item.pharmacyName}</p><p className="text-sm font-bold text-blue-600">₱{item.price.toFixed(2)}</p></div><div className="flex items-center gap-2 border border-gray-300 rounded-full p-1"><button onClick={() => handleUpdateQuantity(item.id, -1)} className="w-7 h-7 flex items-center justify-center text-gray-600 hover:bg-gray-200 rounded-full">-</button><span className="w-8 text-center font-medium">{item.quantity}</span><button onClick={() => handleUpdateQuantity(item.id, 1)} className="w-7 h-7 flex items-center justify-center text-gray-600 hover:bg-gray-200 rounded-full">+</button></div></li>
+                    <li key={item.id} className="flex items-center gap-4">
+                      <div className="w-16 h-16 relative flex-shrink-0"><Image src={item.imageUrl || '/placeholder.png'} alt={item.name} layout="fill" objectFit="contain" className="rounded-md border bg-white p-1"/>
+                      </div>
+                      <div className="flex-grow">
+                        <p className="font-semibold">{item.name}</p>
+                        <p className="text-sm text-gray-500">{item.pharmacyName}</p>
+                        <p className="text-sm font-bold text-blue-600">₱{item.price.toFixed(2)}</p>
+                        </div>
+                        <div className="flex items-center gap-2 border border-gray-300 rounded-full p-1">
+                          <button onClick={() => handleUpdateQuantity(item.id, -1)} className="w-7 h-7 flex items-center justify-center text-gray-600 hover:bg-gray-200 rounded-full">
+                            -</button>
+                          <span className="w-8 text-center font-medium">{item.quantity}</span>
+                          <button onClick={() => handleUpdateQuantity(item.id, 1)} className="w-7 h-7 flex items-center justify-center text-gray-600 hover:bg-gray-200 rounded-full">+</button>
+                          </div>
+                          </li>
                 ))}</ul>
             )}
+
         </div>
-        {cart.length > 0 && (<div className="p-6 border-t bg-gray-50 rounded-b-xl"><div className="flex justify-between items-center text-lg font-bold mb-4"><span>Total</span><span>₱{cartTotal.toFixed(2)}</span></div><button onClick={onCheckout} className="w-full text-center bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-colors">Proceed to Checkout</button></div>)}
+
+        {cart.length > 0 && (<div className="p-6 border-t bg-gray-50 rounded-b-xl">
+            <div className="flex justify-between items-center text-lg font-bold mb-4 border-b">
+                <span>Total</span>
+                <span className="text-green-600">₱{cartTotal.toFixed(2)}</span>
+            </div>
+            <hr className="h-2 bg-green-500 border-none"></hr>
+            <p className="text-gray-500 font-extrabold mb-4">Payment Method:</p>
+            <div className="grid grid-cols-1 gap-4">
+                <button onClick={onCheckout} className="bg-green-400 hover:bg-green-200 text-white font-bold py-3 rounded-lg border-4 border-green-900 transition-colors">On cash Delivery</button>
+                <button  onClick={onCheckout} className="bg-red-400 hover:bg-red-200 text-white font-bold py-3 rounded-lg rounded-lg border-4 border-red-900 transition-colors">G-Cash</button>
+                <p className="text-red-500">Note: Temporarily unavailable</p>
+                <button  className="bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg rounded-lg border-4 border-green-900 transition-colors">Debit/creditcard</button>
+                <hr className= "h-2 bg-green-500 border-none"></hr>
+                <p className="text-red-500">Note: Temporarily unavailable</p>
+                <button className="bg-white hover:bg-gray-200   text-red-600 font-bold py-3 rounded-lg rounded-lg border-4 border-green-900 transition-colors">Order Check Out</button>
+                
+            </div>
+        </div>)}
+        
+
     </>
 );
 
@@ -97,16 +217,29 @@ export default function ShopPage() {
   useEffect(() => {
     // This effect runs only once on the client after mounting
     const generatedPharmacies = initialPharmacies.map(pharmacyInfo => {
-      const products = (pharmacyImageFiles[pharmacyInfo.id] || []).map(fileName => {
+      const allFiles = pharmacyImageFiles[pharmacyInfo.id] || [];
+      const genericProducts: Product[] = allFiles.filter(f => !f.toLowerCase().includes('wellness')).map(fileName => {
         const productName = formatProductName(fileName);
         return {
-          id: `${pharmacyInfo.id}-${productName.toLowerCase().replace(/\s/g, '-')}`,
+          id: `${pharmacyInfo.id}-generic-${productName.toLowerCase().replace(/\s/g, '-')}`,
           name: productName,
-          price: Math.floor(Math.random() * 21) + 5, // Random price is now generated client-side
+          price: Math.floor(Math.random() * 21) + 5,
           imageUrl: `/pharmacies/${pharmacyInfo.id}/png/${fileName}`,
         };
       });
-      return { ...pharmacyInfo, productCategories: [{ name: "Available Products", products: products }] };
+      const wellnessProducts: Product[] = allFiles.filter(f => f.toLowerCase().includes('wellness')).map(fileName => {
+        const productName = formatProductName(fileName);
+        return {
+          id: `${pharmacyInfo.id}-wellness-${productName.toLowerCase().replace(/\s/g, '-')}`,
+          name: productName,
+          price: Math.floor(Math.random() * 21) + 5,
+          imageUrl: `/pharmacies/${pharmacyInfo.id}/png/${fileName}`,
+        };
+      });
+      const productCategories = [];
+      if (genericProducts.length > 0) productCategories.push({ name: 'Generic Products', products: genericProducts });
+      if (wellnessProducts.length > 0) productCategories.push({ name: 'Wellness Products', products: wellnessProducts });
+      return { ...pharmacyInfo, productCategories };
     });
     setPharmacies(generatedPharmacies);
     setIsClient(true); // Signal that client-side rendering is complete

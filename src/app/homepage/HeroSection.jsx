@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// This is a complete and self-contained HeroSection component
 export default function HeroSection() {
-  // List of ad images in /public/ads
   const adImages = [
     '/ads/Ad1.png',
     '/ads/Ad2.png',
@@ -16,66 +15,77 @@ export default function HeroSection() {
     '/ads/Zion Advertisement.png',
   ];
 
-  // State now holds the INDEX of the current ad, not the path
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // This effect sets up a timer to change to the next ad
     const timer = setTimeout(() => {
-      let nextIndex;
-      // Pick a new random index, ensuring it's not the same as the current one
-      do {
-        nextIndex = Math.floor(Math.random() * adImages.length);
-      } while (nextIndex === currentIndex && adImages.length > 1);
-      
-      setCurrentIndex(nextIndex); // Trigger the transition by updating the index
-    }, 10000); // Change ad every 10 seconds
+      // Simple cycle to the next image instead of random
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % adImages.length);
+    }, 8000); // Change ad every 8 seconds
 
-    // Cleanup function to clear the timer when the component unmounts or re-renders
     return () => clearTimeout(timer);
-  }, [currentIndex, adImages.length]); // Re-run the effect whenever the currentIndex changes
-
+  }, [currentIndex, adImages.length]);
 
   return (
     <section className="relative bg-gradient-to-r from-green-600 to-emerald-500 text-white py-20 px-4 overflow-hidden">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between z-10 relative">
-        <div className="max-w-md text-center md:text-left mb-8 md:mb-0">
-          <h1 className="text-5xl font-extrabold leading-tight mb-4">
-            Your Health, <br /> Delivered.
+      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between z-10 relative gap-12">
+        
+        {/* Text Content */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="max-w-xl text-center lg:text-left"
+        >
+          <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+            Your Health, <br /> Delivered Fast.
           </h1>
-          <p className="text-xl opacity-90 mb-6">
-            Everything is made easy with Pharmac EZ. Get your medications and wellness products from Surigao City's trusted pharmacies, delivered right to your doorstep.
+          <p className="text-xl opacity-90 mb-8">
+            Get essentials from Surigao City's trusted pharmacies, delivered right to your doorstep.
           </p>
-          <Link href="/cart" className="bg-white text-green-700 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+          <Link href="/cart" className="bg-white text-green-700 hover:bg-gray-100 font-bold py-4 px-10 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 inline-block">
             Shop Now
           </Link>
-        </div>
+        </motion.div>
 
-        {/* Image container for the cross-fade effect */}
-        <div className="relative flex-shrink-0 w-[500px] h-[350px]"onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % adImages.length)}>
-          
-          {adImages.map((src, index) => (
-            <Image 
-              key={src} // Add a key for each image
-              src={src}
-              alt="Pharmacy Delivery Advertisement in Surigao City" 
-              layout="fill"
-              objectFit="cover"
-              priority={index === 0} // Only prioritize the first image for faster initial load
-              className={`
-                absolute inset-0 rounded-lg shadow-xl
-                transition-opacity duration-1000 ease-in-out
-                ${index === currentIndex ? 'opacity-100' : 'opacity-0'}
-              `}
-            />
-          ))}
-        </div>
+        {/* Image Slideshow Container */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative w-full max-w-lg h-64 md:h-80 lg:h-96 rounded-2xl shadow-2xl overflow-hidden"
+          onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % adImages.length)}
+        >
+          <AnimatePresence>
+            {adImages.map((src, index) => (
+              index === currentIndex && (
+                <motion.div
+                  key={src}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.0, ease: 'easeInOut' }}
+                  className="absolute inset-0"
+                >
+                  <Image 
+                    src={src}
+                    alt="Pharmacy Delivery Advertisement in Surigao City" 
+                    layout="fill"
+                    objectFit="cover"
+                    priority={index === 0}
+                  />
+                </motion.div>
+              )
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
       </div>
       
-      {/* Background patterns for a modern look */}
+      {/* Background patterns */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute w-64 h-64 bg-white rounded-full -bottom-20 -left-20 animate-pulse-slow"></div>
-        <div className="absolute w-48 h-48 bg-white rounded-full top-10 right-20 opacity-50 animate-pulse-slow delay-100"></div>
+        <div className="absolute w-64 h-64 bg-white rounded-full -bottom-20 -left-20"></div>
+        <div className="absolute w-48 h-48 bg-white rounded-full top-10 right-20 opacity-50"></div>
       </div>
     </section>
   );
