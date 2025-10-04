@@ -62,7 +62,10 @@ const pharmacyImageFiles: { [key: string]: string[] } = {
     "wellness/Zion VitaminE+Lecithin (Wellness) .png",
   ],
 };
-const formatProductName = (filename: string): string => filename.split('/').pop()?.replace('.png', '').replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase()).trim();
+const formatProductName = (filename: string): string => {
+  const name = filename.split('/').pop() || '';
+  return name.replace('.png', '').replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase()).trim();
+};
 const adImages = ['/ads/Ad1.png', '/ads/Ad2.png', '/ads/PharmacEZAd1.png', '/ads/PharmacEZ Ad2.png', '/ads/PharmacEZAdvertisement.png', '/ads/Zion Advertisement.png'];
 
 
