@@ -70,7 +70,7 @@ const adImages = ['/ads/Ad1.png', '/ads/Ad2.png', '/ads/PharmacEZAd1.png', '/ads
 
 
 // --- SUB-COMPONENTS for a cleaner structure ---
-const Header = ({ cartItemCount }) => {
+const Header = ({ cartItemCount }: { cartItemCount: number }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     useEffect(() => { 
       document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto'; 
@@ -162,12 +162,18 @@ const HeroSection = () => {
     );
 };
 
-const CartContent = ({ cart, cartTotal, handleUpdateQuantity, onCheckout }) => (
+type CartContentProps = {
+  cart: CartItem[];
+  cartTotal: number;
+  handleUpdateQuantity: (id: string, amount: number) => void;
+  onCheckout: () => void;
+};
+const CartContent = ({ cart, cartTotal, handleUpdateQuantity, onCheckout }: CartContentProps) => (
     <>
         <div className="p-6 max-h-[calc(100vh-160px)] overflow-y-auto">
             {cart.length === 0 ? (<p className="text-gray-500 text-center py-8">Your cart is empty.</p>) : (
-                <ul className="space-y-4">{cart.map(item => (
-                    <li key={item.id} className="flex items-center gap-4">
+        <ul className="space-y-4">{cart.map((item: CartItem) => (
+          <li key={item.id} className="flex items-center gap-4">
                       <div className="w-16 h-16 relative flex-shrink-0"><Image src={item.imageUrl || '/placeholder.png'} alt={item.name} layout="fill" objectFit="contain" className="rounded-md border bg-white p-1"/>
                       </div>
                       <div className="flex-grow">
@@ -196,12 +202,12 @@ const CartContent = ({ cart, cartTotal, handleUpdateQuantity, onCheckout }) => (
             <p className="text-gray-500 font-extrabold mb-4">Payment Method:</p>
             <div className="grid grid-cols-1 gap-4">
                 <button onClick={onCheckout} className="bg-green-400 hover:bg-green-200 text-white font-bold py-3 rounded-lg border-4 border-green-900 transition-colors">On cash Delivery</button>
-                <button  onClick={onCheckout} className="bg-red-400 hover:bg-red-200 text-white font-bold py-3 rounded-lg rounded-lg border-4 border-red-900 transition-colors">G-Cash</button>
+                <button  onClick={onCheckout} className="bg-red-400 hover:bg-red-200 text-white font-bold py-3 rounded-lg border-4 border-red-900 transition-colors">G-Cash</button>
                 <p className="text-red-500">Note: Temporarily unavailable</p>
-                <button  className="bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg rounded-lg border-4 border-green-900 transition-colors">Debit/creditcard</button>
+                <button  className="bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg border-4 border-green-900 transition-colors">Debit/creditcard</button>
                 <hr className= "h-2 bg-green-500 border-none"></hr>
                 <p className="text-red-500">Note: Temporarily unavailable</p>
-                <button className="bg-white hover:bg-gray-200   text-red-600 font-bold py-3 rounded-lg rounded-lg border-4 border-green-900 transition-colors">Order Check Out</button>
+                <button className="bg-white hover:bg-gray-200   text-red-600 font-bold py-3 rounded-lg border-4 border-green-900 transition-colors">Order Check Out</button>
                 
             </div>
         </div>)}
@@ -301,18 +307,16 @@ export default function ShopPage() {
                         <div key={category.name}>
                             <h4 className="text-xl font-semibold mb-4 pb-2 border-b-2 border-emerald-500">{category.name}</h4>
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                {category.products.map((product) => {
-                                    const isRecentlyAdded = recentlyAddedId === product.id;
-                                    return (
-                                    <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                                        <div className="relative w-full h-36 bg-gray-100 overflow-hidden">{product.imageUrl && <Image src={product.imageUrl} alt={product.name} layout="fill" objectFit="contain" className="p-3 transition-transform duration-300 group-hover:scale-110" />}</div>
-                                        <div className="p-4 flex flex-col flex-grow">
-                                            <p className="font-semibold text-gray-800 text-base flex-grow min-h-[40px]">{product.name}</p>
-                                            <p className="text-blue-600 font-bold text-xl mt-1 mb-3">₱{product.price.toFixed(2)}</p>
-                                            <button onClick={() => handleAddToCart(pharmacy, product)} disabled={recentlyAddedId === product.id} className={`w-full mt-auto px-4 py-2 text-sm font-semibold rounded-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${recentlyAddedId === product.id ? 'bg-blue-600 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'}`}>{recentlyAddedId === product.id ? 'Added ✔' : 'Add to Cart'}</button>
-                                        </div>
-                                    </div>
-                                )})}
+                {category.products.map((product) => (
+                  <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div className="relative w-full h-36 bg-gray-100 overflow-hidden">{product.imageUrl && <Image src={product.imageUrl} alt={product.name} layout="fill" objectFit="contain" className="p-3 transition-transform duration-300 group-hover:scale-110" />}</div>
+                    <div className="p-4 flex flex-col flex-grow">
+                      <p className="font-semibold text-gray-800 text-base flex-grow min-h-[40px]">{product.name}</p>
+                      <p className="text-blue-600 font-bold text-xl mt-1 mb-3">₱{product.price.toFixed(2)}</p>
+                      <button onClick={() => handleAddToCart(pharmacy, product)} disabled={recentlyAddedId === product.id} className={`w-full mt-auto px-4 py-2 text-sm font-semibold rounded-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${recentlyAddedId === product.id ? 'bg-blue-600 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'}`}>{recentlyAddedId === product.id ? 'Added ✔' : 'Add to Cart'}</button>
+                    </div>
+                  </div>
+                ))}
                             </div>
                         </div>
                     ))}
