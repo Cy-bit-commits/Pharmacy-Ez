@@ -20,7 +20,7 @@ const initialPharmacies = [
 const pharmacyImageFiles: { [key: string]: string[] } = {
   bringtikacare: ["calmFlex.png",  // -- this are  the products of bringtikacare
      "AllerCare.png",
-     "ColdRelief.png",
+     "ColdiRelief.png",
      
       "GastroGuard.png",
        "RespiraTab.png",
@@ -33,7 +33,7 @@ const pharmacyImageFiles: { [key: string]: string[] } = {
   medicareplus: ["Medicilin.png", 
     "mediReleif.png", 
     "MediGel.png", 
-    "Mdicilin.png",
+    "Medicilin.png",
     "wellness/MediOil.png", 
     "wellness/MediTox.png", 
     "wellness/MediTherapy.png"
