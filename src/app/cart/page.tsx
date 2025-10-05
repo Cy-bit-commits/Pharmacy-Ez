@@ -18,17 +18,26 @@ const initialPharmacies = [
     { name: "Zion Pharmacy", id: "zion", logoUrl: "/pharmacies/zion/png/ZionLogo.png" },
 ];
 const pharmacyImageFiles: { [key: string]: string[] } = {
-  bringtikacare: ["calmFlex.png",
+  bringtikacare: ["calmFlex.png",  // -- this are  the products of bringtikacare
      "AllerCare.png",
+     "ColdRelief.png",
+     
       "GastroGuard.png",
        "RespiraTab.png",
        "CalmFlex.png",
-      "wellness/ComfortNap.png", 
+      "wellness/ComfortNap.png",  // -- files that have "wellness" in their names are wellness products
       "wellness/DermaGlow.png", 
       "wellness/Immunicare.png",
       
     ],
-  medicareplus: ["Medicilin.png", "mediReleif.png", "MediGel.png", "wellness/MediOil.png", "wellness/MediTox.png", "wellness/MediTherapy.png"],
+  medicareplus: ["Medicilin.png", 
+    "mediReleif.png", 
+    "MediGel.png", 
+    "Mdicilin.png",
+    "wellness/MediOil.png", 
+    "wellness/MediTox.png", 
+    "wellness/MediTherapy.png"
+  ],
   zion: [
     "Zion AnalgesicAntipyretic (Generic).png",
     "Zion AnalgesicAntipyreticDecongestantAntihistamine Syrup (Generic).png",
@@ -66,7 +75,13 @@ const formatProductName = (filename: string): string => {
   const name = filename.split('/').pop() || '';
   return name.replace('.png', '').replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase()).trim();
 };
-const adImages = ['/ads/Ad1.png', '/ads/Ad2.png', '/ads/PharmacEZAd1.png', '/ads/PharmacEZ Ad2.png', '/ads/PharmacEZAdvertisement.png', '/ads/Zion Advertisement.png'];
+const adImages = ['/ads/Ad1.png', // these are ads for the homepage
+  '/ads/Ad2.png', 
+  '/ads/PharmacEZAd1.png', 
+  '/ads/PharmacEZ Ad2.png', 
+  '/ads/PharmacEZAdvertisement.png', 
+  '/ads/Zion Advertisement.png'
+];
 
 
 // --- SUB-COMPONENTS for a cleaner structure ---
@@ -88,9 +103,13 @@ const Header = ({ cartItemCount }: { cartItemCount: number }) => {
                 <div className="container mx-auto px-4 py-3 flex items-center justify-between">
                     <Link href="/" className="flex items-center space-x-2">
                     <Image src="/logo.png" alt="PharmEZ Logo" width={40} height={40} className="rounded-full" />
-                    <span className="text-2xl font-bold text-green-700">PharmacEZ</span>
+                    <span className="text-2xl font-bold text-green-700">
+                    PharmacEZ
+                    </span>
                     </Link>
-                    <div className="hidden lg:flex flex-grow max-w-xl mx-8 relative">
+                     {/* Search bar */}
+
+                    <div className="hidden lg:flex flex-grow max-w-xl mx-8 relative"> 
                       <input type="text" placeholder="Search products..." className="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500" />
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                       </div>
@@ -105,15 +124,51 @@ const Header = ({ cartItemCount }: { cartItemCount: number }) => {
                         <User size={24} />
                         <span>
                           Account</span></Link>
-                        <button onClick={handleLogout} className="flex items-center gap-1 text-gray-700 hover:text-red-600"><LogOut size={24} /><span>Exit</span></button>
+                        <button onClick={handleLogout} className="flex items-center gap-1 text-gray-700 hover:text-red-600">
+                          <LogOut size={24} /><span>
+                            Exit
+                          </span>
+                        </button>
                     </div>
                     <div className="lg:hidden"><button onClick={() => setIsMenuOpen(true)} aria-label="Open menu"><Menu size={28} /></button></div>
                 </div>
             </header>
-            <AnimatePresence>{isMenuOpen && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 z-50" onClick={() => setIsMenuOpen(false)} />}</AnimatePresence>
+            <AnimatePresence>{isMenuOpen && <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 bg-black/50 z-50" onClick={() => setIsMenuOpen(false)} />}
+            </AnimatePresence>
             <div className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-white shadow-xl z-50 transform transition-transform duration-300 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                <div className="flex justify-between items-center p-4 border-b"><h2 className="font-bold text-lg text-green-700">Menu</h2><button onClick={() => setIsMenuOpen(false)}><X size={28} /></button></div>
-                <nav className="p-4 space-y-4"><Link href="/cart" className="flex items-center gap-4 text-lg p-3 rounded-md hover:bg-gray-100"><ShoppingCart size={24} /><span>Cart</span>{cartItemCount > 0 && <span className="ml-auto bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">{cartItemCount}</span>}</Link><Link href="/account" className="flex items-center gap-4 text-lg p-3 rounded-md hover:bg-gray-100"><User size={24} /><span>Account</span></Link><button onClick={handleLogout} className="w-full flex items-center gap-4 text-lg text-red-600 p-3 rounded-md hover:bg-red-50"><LogOut size={24} /><span>Exit</span></button></nav>
+                <div className="flex justify-between items-center p-4 border-b">
+                  <h2 className="font-bold text-lg text-green-700">
+                    Menu
+                    </h2>
+                    <button onClick={() => setIsMenuOpen(false)}>
+                      <X size={28} />
+                      </button>
+                      </div>
+                <nav className="p-4 space-y-4">
+                  <Link href="/cart" className="flex items-center gap-4 text-lg p-3 rounded-md hover:bg-gray-100">
+                  <ShoppingCart size={24} /
+                  ><span>
+                    Cart
+                    </span>{cartItemCount > 0 && <span className="ml-auto bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center">
+                      {cartItemCount}
+                      </span>}
+                      </Link>
+                      <Link href="/account" className="flex items-center gap-4 text-lg p-3 rounded-md hover:bg-gray-100">
+                      <User size={24} />
+                      <span>
+                        Account
+                        </span>
+                        </Link>
+                        <button onClick={handleLogout} className="w-full flex items-center gap-4 text-lg text-red-600 p-3 rounded-md hover:bg-red-50"><LogOut size={24} />
+                        <span>
+                          Exit
+                          </span>
+                          </button>
+                          </nav>
             </div>
         </>
     );
@@ -297,7 +352,11 @@ export default function ShopPage() {
       <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
         <HeroSection />
         <div id="shop" className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <header className="text-center mb-12"><h2 className="text-4xl font-extrabold text-gray-800 tracking-tight">Shop All Pharmacies</h2><p className="mt-2 text-lg text-gray-600">Convenience from your local favorites in Ozamis City.</p></header>
+          <header className="text-center mb-12"><h2 className="text-4xl font-extrabold text-gray-800 tracking-tight">
+            Shop All Pharmacies</h2>
+            <p className="mt-2 text-lg text-gray-600">
+              Convenience from your local favorites in Ozamis City.</p>
+              </header>
           <div className="flex flex-col lg:flex-row gap-12">
             <main className="lg:w-2/3 space-y-16">
               {pharmacies.map((pharmacy) => (
@@ -308,12 +367,12 @@ export default function ShopPage() {
                             <h4 className="text-xl font-semibold mb-4 pb-2 border-b-2 border-emerald-500">{category.name}</h4>
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {category.products.map((product) => (
-                  <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                  <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-600 flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div className="relative w-full h-36 bg-gray-100 overflow-hidden">{product.imageUrl && <Image src={product.imageUrl} alt={product.name} layout="fill" objectFit="contain" className="p-3 transition-transform duration-300 group-hover:scale-110" />}</div>
                     <div className="p-4 flex flex-col flex-grow">
                       <p className="font-semibold text-gray-800 text-base flex-grow min-h-[40px]">{product.name}</p>
                       <p className="text-blue-600 font-bold text-xl mt-1 mb-3">₱{product.price.toFixed(2)}</p>
-                      <button onClick={() => handleAddToCart(pharmacy, product)} disabled={recentlyAddedId === product.id} className={`w-full mt-auto px-4 py-2 text-sm font-semibold rounded-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${recentlyAddedId === product.id ? 'bg-blue-600 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'}`}>{recentlyAddedId === product.id ? 'Added ✔' : 'Add to Cart'}</button>
+                      <button onClick={() => handleAddToCart(pharmacy, product)} disabled={recentlyAddedId === product.id} className={`w-full mt-auto px-4 py-2 text-sm font-semibold rounded-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${recentlyAddedId === product.id ? 'bg-blue-600 text-white cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700 border-3 border-green-900 focus:ring-green-500'}`}>{recentlyAddedId === product.id ? 'Added ✔' : 'Add to Cart'}</button>
                     </div>
                   </div>
                 ))}
@@ -335,9 +394,11 @@ export default function ShopPage() {
 
         {cart.length > 0 && (
           <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg shadow-[0_-2px_10px_rgba(0,0,0,0.1)] p-3 z-40">
-            <button onClick={() => setIsMobileCartOpen(true)} className="flex items-center justify-between bg-green-600 text-white font-bold py-3 px-5 rounded-lg w-full">
+            <button onClick={() => setIsMobileCartOpen(true)} className="flex items-center justify-between bg-green-600 border-4 border-green-900 text-white font-bold py-3 px-5 rounded-lg w-full">
               <div className="flex items-center gap-2"><ShoppingCart /><span>{totalItems} item{totalItems > 1 ? 's' : ''}</span></div>
-              <span>View Cart</span><span>₱{cartTotal.toFixed(2)}</span>
+              <span>
+                View Cart</span>
+                <span>₱{cartTotal.toFixed(2)}</span>
             </button>
           </div>
         )}
